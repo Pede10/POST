@@ -1,0 +1,59 @@
+body	{
+	background: #012219;	
+	
+}
+
+.form_style #contentText {
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+
+}
+.form_style #FormSubmit {
+	display: block;
+	background: #337005;
+	border: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	margin-top: 5px;
+	padding: 6px 9px 6px 9px;
+	border-radius: 5px;
+}
+#responds{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+#responds li {
+	list-style: none;
+	padding: 15px;
+	background: rgb(43, 42, 42);
+	margin-bottom: 5px;
+	border-radius: 5px;
+	max-width: 400px;
+	font-size: 13px;
+	color: #08FF00;
+}
+
+#responds li.sel {
+	background: rgb(255, 221, 221);
+}
+
+.del_wrapper{
+	float:right;
+
+}
+
+.content_wrapper {
+	max-width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.besked	{
+	color: #ffffff;
+	font-size: 20px;
+}
+
+.tStamp	{
+	font-size: 12px;
+	font-style: italic;
+}
