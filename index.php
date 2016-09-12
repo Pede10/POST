@@ -1,16 +1,38 @@
+<?php
+
+include_once("conn.php"); 
+
+$results = $mysqli->query("SELECT id, content, timestamp FROM postDB");
+
+while($row = $results->fetch_assoc())	{
+   $resultPackage .= '<li id="item_'.$row["id"].'">
+					 <p class="tStamp">'. $row["timestamp"] . '</p>
+					 <div class="del_wrapper"><a href="#" class="del_button" id="del-'.$row["id"].'">
+					 <img src="images/icon_del.gif" border="0" />
+					 </a></div>
+					 <p class="besked">' . $row["content"] . '</p></li>';
+					
+
+}
+
+$mysqli->close();
+							
+							
+?>
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>POST</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>POST</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
 
-<script type="text/javascript">
-$(document).ready(function() {
-
-	$("#FormSubmit").click(function (e) {
-			e.preventDefault();
-			if($("#contentText").val()==='')
-			{
+				$("#FormSubmit").click(function (e) {
+					e.preventDefault();
+					if($("#contentText").val()==='')
+				{
 				alert("Indtast noget!");
 				return false;
 			}
@@ -29,6 +51,8 @@ $(document).ready(function() {
 					$("#contentText").val(''); 
 					$("#FormSubmit").show(); 
 					$("#LoadingImage").hide();
+					
+					
 				},
 				error:function (xhr, ajaxOptions, thrownError)	{
 					$("#FormSubmit").show(); 
@@ -36,6 +60,7 @@ $(document).ready(function() {
 					alert(thrownError);
 				}
 			});
+			
 		});
 
 	
@@ -64,42 +89,20 @@ $(document).ready(function() {
 });
 
 </script>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+		
+<link href="style.css" rel="stylesheet" type="text/css" />
+
 </head>
+	
 <body>
-<div class="content_wrapper">
-<ul id="responds">
-<?php
+	<div class="content_wrapper">
+		<ul id="responds"> <?php echo $resultPackage;  ?> </ul>
 
-include_once("conn.php");
-
-$results = $mysqli->query("SELECT
-							id,
-							content,
-							timestamp
-						   FROM
-							postDB");
-
-while($row = $results->fetch_assoc())
-{
-  echo '<li id="item_'.$row["id"].'">';
-  echo '<p class="tStamp">'. $row["timestamp"] . '</p>';
-  echo '<div class="del_wrapper"><a href="#" class="del_button" id="del-'.$row["id"].'">';
-  echo '<img src="images/icon_del.gif" border="0" />';
-  echo '</a></div>';
-  echo '<p class="besked">' . $row["content"] . '</p></li>';
-}
-
-$mysqli->close();
-?>
-
-</ul>
-    <div class="form_style">
-    <textarea name="content_txt" id="contentText" cols="54" rows="8" placeholder="Skriv"></textarea>
-    <button id="FormSubmit">Go Go</button>
-    <img src="images/loading.gif" id="LoadingImage" style="display:none" />
-    </div>
-</div>
-
+		<div class="form_style">
+			<textarea name="content_txt" id="contentText" cols="54" rows="8" placeholder="Skriv noget!"></textarea>
+			<button id="FormSubmit" action="./">Go Go</button>
+			<img src="images/loading.gif" id="LoadingImage" style="display:none" />
+		</div>
+	</div>
 </body>
 </html>
